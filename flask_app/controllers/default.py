@@ -7,9 +7,9 @@ def index():
     return '<center><p>Hello World</p></center>'
 
 
-@app.route('/test')
+@app.route('/test', defaults={'name': None})
 @app.route('/test/<name>')
-def test(name=None):
+def test(name):
     if name:
         return f'<center><p>Olá {name}!</p></center>'
 
