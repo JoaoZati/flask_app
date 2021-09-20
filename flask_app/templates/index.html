@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>FlasK app</title>
+    <link rel= "stylesheet" href="{{ url_for('static', filename = "css/bootstrap.min.css") }}" >
+    <script src="{{ url_for('static', filename = "js/bootstrap.min.js") }}"></script>
 </head>
 <body>
     <center><h1>Flask app</h1></center>
@@ -11,5 +13,6 @@
     {% else %}
     <center><h3>Bem Vindo ao Flask app!</h3></center>
     {% endif %}
+
 </body>
 </html>
