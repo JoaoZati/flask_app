@@ -14,3 +14,9 @@ def test(name):
         return f'<center><p>Olá {name}!</p></center>'
 
     return '<center><p>Olá usuario!</p></center>'
+
+
+@app.route('/test/int/<int:id>')
+def test_int(id):
+    print(type(id))
+    return f'<center>{id}</center>'
