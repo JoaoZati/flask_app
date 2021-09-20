@@ -16,7 +16,7 @@ def test(name):
     return '<center><p>Olá usuario!</p></center>'
 
 
-@app.route('/test/int/<int:id>')
+@app.route('/test/int/<int:id>', methods=['GET'])
 def test_int(id):
     print(type(id))
     return f'<center>{id}</center>'
