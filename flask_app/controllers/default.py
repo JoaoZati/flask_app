@@ -19,4 +19,12 @@ def test(name):
 @app.route('/test/int/<int:id>', methods=['GET'])
 def test_int(id):
     print(type(id))
-    return f'<center>{id}</center>'
+    return f'''
+    <html>
+    <head>
+        <title>int</title>
+    </head>
+    <body>
+        <center><h1>{id}</h1></center>
+    </body>
+    </html>'''
