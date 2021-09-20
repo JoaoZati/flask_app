@@ -6,6 +6,10 @@
 </head>
 <body>
     <center><h1>Flask app</h1></center>
-    <center><h3>Bem Vindo!</h3></center>
+    {% if user %}
+    <center><h3>Bem Vindo ao Flask app {{ user }}!</h3></center>
+    {% else %}
+    <center><h3>Bem Vindo ao Flask app!</h3></center>
+    {% endif %}
 </body>
 </html>

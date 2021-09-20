@@ -18,10 +18,5 @@ def test_home_index(resp_home):
     assert resp_home.status_code == 200
 
 
-@pytest.mark.parametrize(
-    'name',
-    ['joao', 'guilherme']
-)
-def test_titulo(resp_home, name):
-    assert bytes(f"Bem Vindo {name}!", 'ascii') in resp_home.data
-
+def test_titulo_home(resp_home):
+    assert b"Bem Vindo ao Flask app!" in resp_home.data
