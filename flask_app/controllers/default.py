@@ -8,6 +8,6 @@ def index(user):
     return render_template('index.html', user=user)
 
 
-@app.route('/base')
-def base():
-    return render_template('base.html')
+@app.route('/login')
+def login():
+    return render_template('login.html')

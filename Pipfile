@@ -9,6 +9,7 @@ flask-sqlalchemy = "*"
 flask-migrate = "*"
 flask-script = "*"
 flask-collect = "*"
+flask-wtf = "*"
 
 [dev-packages]
 flake8 = "*"
