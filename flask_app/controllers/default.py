@@ -2,7 +2,7 @@ from flask_app import app, login_manager
 from flask import render_template, flash, redirect
 from flask_app.models.forms import LoginForm
 from flask_app.models.tables import User
-from flask_login import login_user
+from flask_login import login_user, logout_user, login_required
 
 
 @login_manager.user_loader
@@ -32,13 +32,21 @@ def login():
 
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        name = user.name
         if user and user.password == form.password.data:
+            name = user.name
             login_user(user)
             flash('Logged in')
             return redirect(f"/usuario/{name}")
         else:
             flash('Invalid loggin')
 
-    return render_template('login.html',
-                           form=form)
+    return render_template('login.html', form=form)
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('Logged out')
+    return redirect('/')
+
