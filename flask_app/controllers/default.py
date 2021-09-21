@@ -22,7 +22,7 @@ def login():
 @app.route('/funcao/<info>')
 @app.route('/funcao/', defaults={'info': None})
 def funcao(info):
-    i = User('joaozati', '123', 'Joao Zati', 'joaozati@gmail.com')
+    i = User('Teste', '123', 'Joao Zati', 'teste@gmail.com')
     db.session.add(i)
     db.session.commit()
     return '<center><h2>OK</h2></center>'
