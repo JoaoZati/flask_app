@@ -32,5 +32,5 @@ def user_mock(request):
     ['Joao', 'Guilherme']
 )
 def test_resp_usuario(client, user_mock):
-    resp_usuario = client.get(f'/index/{user_mock}')
+    resp_usuario = client.get(f'/usuario/{user_mock}')
     assert bytes(f'Bem Vindo ao Flask app {user_mock}!', "utf-8") in resp_usuario.data

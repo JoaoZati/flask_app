@@ -1,5 +1,5 @@
 from flask_app import app, login_manager
-from flask import render_template, flash
+from flask import render_template, flash, redirect
 from flask_app.models.forms import LoginForm
 from flask_app.models.tables import User
 from flask_login import login_user
@@ -15,10 +15,15 @@ def user_loader(user_id):
     return User.query.get(user_id)
 
 
-@app.route('/index/<user>')
-@app.route('/', defaults={'user': None})
-def index(user):
-    return render_template('index.html', user=user)
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
+@app.route('/usuario/<user>')
+@app.route('/usuario', defaults={'user': None})
+def usuario(user):
+    return render_template('usuario.html', user=user)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -27,9 +32,11 @@ def login():
 
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
+        name = user.name
         if user and user.password == form.password.data:
             login_user(user)
             flash('Logged in')
+            return redirect(f"/usuario/{name}")
         else:
             flash('Invalid loggin')
 

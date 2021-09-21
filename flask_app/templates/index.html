@@ -1,10 +1,5 @@
 {% extends 'base/base.html' %}
 {% block title %}{{ super() }}-Home Page{% endblock %}
 {% block content %}
-    <center><h1 class="mt-5">Flask app</h1></center>
-    {% if user %}
-    <center><h3 class="mt-5">Bem Vindo ao Flask app {{ user }}!</h3></center>
-    {% else %}
-    <center><h3>Bem Vindo ao Flask app!</h3></center>
-    {% endif %}
+    <center><h3 class="mt-5">Bem Vindo ao Flask app!</h3></center>
 {% endblock %}
