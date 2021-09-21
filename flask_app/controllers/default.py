@@ -24,6 +24,7 @@ def index(user):
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user and user.password == form.password.data:
@@ -31,5 +32,6 @@ def login():
             flash('Logged in')
         else:
             flash('Invalid loggin')
+
     return render_template('login.html',
                            form=form)
