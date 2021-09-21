@@ -1,4 +1,4 @@
-from flask_app import app, db
+from flask_app import app
 from flask import render_template
 from flask_app.models.forms import LoginForm
 from flask_app.models.tables import User
@@ -23,5 +23,9 @@ def login():
 @app.route('/funcao/', defaults={'info': None})
 def funcao(info):
     r = User.query.filter_by(username='joaozati').all()
+    p = User.query.filter_by(password='123').all()
+    q = User.query.filter_by(password='123', username='joaozati').first()
     print(r)
+    print(p)
+    print(q.username, q.name)
     return '<center><h1>Ok</h1></center>'
