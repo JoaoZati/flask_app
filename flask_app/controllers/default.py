@@ -1,6 +1,7 @@
 from flask_app import app
 from flask import render_template
 from flask_app.models.forms import LoginForm
+from flask_app.models.tables import User
 
 
 @app.route('/index/<user>')
@@ -16,3 +17,11 @@ def login():
         print('Success')
     return render_template('login.html',
                            form=form)
+
+
+@app.route('/funcao/<info>')
+@app.route('/funcao/', defaults={'info': None})
+def funcao(info):
+    r = User.query.filter_by(username='Teste').first()
+    print(r.username, r.name, r.id)
+    return '<center><h1>Ok</h1></center>'

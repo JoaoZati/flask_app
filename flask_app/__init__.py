@@ -8,4 +8,5 @@ app.config.from_object('config')
 db = SQLAlchemy(app)  # converter para SQL
 migrate = Migrate(app, db)
 
+from flask_app.models import tables, forms
 from flask_app.controllers import default
