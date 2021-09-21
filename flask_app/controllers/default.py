@@ -1,27 +1,51 @@
-from flask_app import app
-from flask import render_template
+from flask_app import app, login_manager
+from flask import render_template, flash, redirect
 from flask_app.models.forms import LoginForm
 from flask_app.models.tables import User
+from flask_login import login_user, logout_user, login_required
 
 
-@app.route('/index/<user>')
-@app.route('/', defaults={'user': None})
-def index(user):
-    return render_template('index.html', user=user)
+@login_manager.user_loader
+def user_loader(user_id):
+    """Given *user_id*, return the associated User object.
+
+    :param unicode user_id: user_id (email) user to retrieve
+
+    """
+    return User.query.get(user_id)
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
+@app.route('/usuario/<user>')
+@app.route('/usuario', defaults={'user': None})
+def usuario(user):
+    return render_template('usuario.html', user=user)
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+
     if form.validate_on_submit():
-        print('Success')
-    return render_template('login.html',
-                           form=form)
+        user = User.query.filter_by(username=form.username.data).first()
+        if user and user.password == form.password.data:
+            name = user.name
+            login_user(user)
+            flash('Logged in')
+            return redirect(f"/usuario/{name}")
+        else:
+            flash('Invalid loggin')
+
+    return render_template('login.html', form=form)
 
 
-@app.route('/funcao/<info>')
-@app.route('/funcao/', defaults={'info': None})
-def funcao(info):
-    r = User.query.filter_by(username='Teste').first()
-    print(r.username, r.name, r.id)
-    return '<center><h1>Ok</h1></center>'
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('Logged out')
+    return redirect('/')
