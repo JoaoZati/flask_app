@@ -21,5 +21,11 @@
         </li>
       </ul>
     </div>
+    {% if current_user.is_authenticated %}
+      <p class="text-white mb-0 mx-2">{{ current_user.name }}</p>
+      <a class="btn btn-secondary mrl-2" href="{{ url_for('logout') }}" role="button">Logout</a>
+    {% else %}
+      <a class="btn btn-secondary" href="{{ url_for('login') }}" role="button">Login</a>
+    {% endif %}
   </div>
 </nav>

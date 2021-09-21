@@ -49,4 +49,3 @@ def logout():
     logout_user()
     flash('Logged out')
     return redirect('/')
-
