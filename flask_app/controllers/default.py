@@ -1,7 +1,17 @@
-from flask_app import app
+from flask_app import app, login_manager
 from flask import render_template
 from flask_app.models.forms import LoginForm
 from flask_app.models.tables import User
+
+
+@login_manager.user_loader
+def user_loader(user_id):
+    """Given *user_id*, return the associated User object.
+
+    :param unicode user_id: user_id (email) user to retrieve
+
+    """
+    return User.query.get(user_id)
 
 
 @app.route('/index/<user>')
