@@ -22,7 +22,6 @@ def login():
 @app.route('/funcao/<info>')
 @app.route('/funcao/', defaults={'info': None})
 def funcao(info):
-    i = User('Teste', '123', 'Joao Zati', 'teste@gmail.com')
-    db.session.add(i)
-    db.session.commit()
-    return '<center><h2>OK</h2></center>'
+    r = User.query.filter_by(username='joaozati').all()
+    print(r)
+    return '<center><h1>Ok</h1></center>'
