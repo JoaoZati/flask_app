@@ -1,7 +1,8 @@
 from flask_app import app, login_manager
-from flask import render_template
+from flask import render_template, flash
 from flask_app.models.forms import LoginForm
 from flask_app.models.tables import User
+from flask_login import login_user
 
 
 @login_manager.user_loader
@@ -24,14 +25,11 @@ def index(user):
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        print('Success')
+        user = User.query.filter_by(username=form.username.data).first()
+        if user and user.password == form.password.data:
+            login_user(user)
+            flash('Logged in')
+        else:
+            flash('Invalid loggin')
     return render_template('login.html',
                            form=form)
-
-
-@app.route('/funcao/<info>')
-@app.route('/funcao/', defaults={'info': None})
-def funcao(info):
-    r = User.query.filter_by(username='Teste').first()
-    print(r.username, r.name, r.id)
-    return '<center><h1>Ok</h1></center>'
