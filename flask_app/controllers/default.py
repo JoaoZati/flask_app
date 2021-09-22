@@ -1,5 +1,5 @@
 from flask_app import app, login_manager
-from flask import render_template, flash, redirect
+from flask import render_template, flash, redirect, url_for
 from flask_app.models.forms import LoginForm
 from flask_app.models.tables import User
 from flask_login import login_user, logout_user, login_required, current_user
@@ -22,8 +22,10 @@ def index():
 
 @app.route('/usuario/<user>')
 @app.route('/usuario', defaults={'user': None})
-@login_required
 def usuario(user):
+    if not current_user.is_authenticated:
+        flash('Faça o login')
+        return redirect(url_for('index'))
     if current_user.name == user:
         return render_template('usuario.html', user=user)
     return redirect(f"/usuario/{current_user.name}")
