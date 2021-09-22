@@ -2,7 +2,7 @@ from flask_app import app, login_manager
 from flask import render_template, flash, redirect
 from flask_app.models.forms import LoginForm
 from flask_app.models.tables import User
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 
 
 @login_manager.user_loader
@@ -22,8 +22,11 @@ def index():
 
 @app.route('/usuario/<user>')
 @app.route('/usuario', defaults={'user': None})
+@login_required
 def usuario(user):
-    return render_template('usuario.html', user=user)
+    if current_user.name == user:
+        return render_template('usuario.html', user=user)
+    return redirect(f"/usuario/{current_user.name}")
 
 
 @app.route('/login', methods=['GET', 'POST'])
