@@ -33,12 +33,8 @@
             "version": "==8.0.1"
         },
         "flask": {
-            "hashes": [
-                "sha256:1c4c257b1892aec1398784c63791cbaa43062f1f7aeb555c4da961b20ee68f55",
-                "sha256:a6209ca15eb63fc9385f38e452704113d679511d9574d09b2cf9183ae7d20dc9"
-            ],
-            "index": "pypi",
-            "version": "==2.0.1"
+            "hashes": [],
+            "version": "==2.3.3"
         },
         "flask-collect": {
             "hashes": [
