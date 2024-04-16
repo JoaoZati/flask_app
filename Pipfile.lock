@@ -144,12 +144,8 @@
             "version": "==1.1.1"
         },
         "itsdangerous": {
-            "hashes": [
-                "sha256:5174094b9637652bdb841a3029700391451bd092ba3db90600dea710ba28e97c",
-                "sha256:9e724d68fc22902a1435351f84c3fb8623f303fffcc566a4cb952df8c572cff0"
-            ],
-            "markers": "python_version >= '3.6'",
-            "version": "==2.0.1"
+            "hashes": [],
+            "version": "==2.2.0"
         },
         "jinja2": {
             "hashes": [
